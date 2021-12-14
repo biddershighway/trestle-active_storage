@@ -4,7 +4,11 @@
       <% if attachments.attached? && builder.object.persisted?  %>
         <% attachments.each do |attachment| %>
           <div class="active-storage__preview position-relative">
-            <%= image_tag(main_app.url_for(attachment.variant(resize_to_limit: [300, 300])), class: "active-storage__image") %>
+            <% if attachment.variant(:thumb).processed? %>
+              <%= image_tag(main_app.url_for(attachment.variant(:thumb)), class: "active-storage__image") %>
+            <% else %>
+              <%= image_tag(asset_path("processing.png"), class: "active-storage__image") %>
+            <% end %>
             <%= link_to main_app.rails_blob_path(attachment, disposition: "attachment"), class: "btn btn-info position-absolute" do %>
               <i class="fa fa-download"></i>
             <% end %>
