@@ -13,7 +13,6 @@
           <span class="btn-label">Download <%= field_name %></span>
         <% end %>
       <% end %>
-      <div><small><%= attachment.blob.filename %></small></div>
     </div>
 
     <%= builder.check_box("delete_#{field_name}", label: "Delete #{field_name}") %>
